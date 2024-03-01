@@ -13,7 +13,10 @@ class Program
             Console.WriteLine("3. Sortowanie przez wstawianie");
             Console.WriteLine("4. Przeszukiwanie binarne");
             Console.WriteLine("5. Algorytm Dijkstry");
-            Console.WriteLine("6. Wyjście");
+            Console.WriteLine("6. Sortowanie przez scalanie");
+            Console.WriteLine("7. Wyszukiwanie liniowe");
+            Console.WriteLine("8. Obliczanie silni");
+            Console.WriteLine("9. Wyjście");
 
             var choice = Console.ReadLine();
 
@@ -35,6 +38,15 @@ class Program
                     DijkstraDemo();
                     break;
                 case "6":
+                    MergeSortDemo();
+                    break;
+                case "7":
+                    LinearSearchDemo();
+                    break;
+                case "8":
+                    FactorialDemo();
+                    break;
+                case "9":
                     return;
                 default:
                     Console.WriteLine("Nieprawidłowy wybór");
@@ -203,5 +215,66 @@ class Program
         }
 
         return distances;
+    }
+
+    private static void MergeSortDemo()
+    {
+        int[] array = { 12, 11, 13, 5, 6, 7 };
+        Console.WriteLine("Oryginalna tablica: " + string.Join(", ", array));
+        MergeSort(array, 0, array.Length - 1);
+        Console.WriteLine("Posortowana tablica (Merge Sort): " + string.Join(", ", array));
+    }
+
+    private static void MergeSort(int[] array, int left, int right)
+    {
+        if (left < right)
+        {
+            int middle = left + (right - left) / 2;
+
+            MergeSort(array, left, middle);
+            MergeSort(array, middle + 1, right);
+
+            Merge(array, left, middle, right);
+        }
+    }
+
+    private static void Merge(int[] array, int left, int middle, int right)
+    {
+        // Implementacja scalania dwóch podtablic
+    }
+
+    private static void LinearSearchDemo()
+    {
+        int[] array = { 2, 3, 4, 10, 40 };
+        int x = 10;
+        int result = LinearSearch(array, x);
+        if (result == -1)
+            Console.WriteLine("Element nie jest obecny w tablicy");
+        else
+            Console.WriteLine("Element znaleziony na pozycji: " + result);
+    }
+
+    private static int LinearSearch(int[] arr, int x)
+    {
+        for (int i = 0; i < arr.Length; i++)
+        {
+            if (arr[i] == x)
+                return i;
+        }
+        return -1;
+    }
+
+    private static void FactorialDemo()
+    {
+        Console.WriteLine("Podaj liczbę do obliczenia silni:");
+        int number = int.Parse(Console.ReadLine());
+        Console.WriteLine($"Silnia liczby {number} wynosi: {Factorial(number)}");
+    }
+
+    private static int Factorial(int n)
+    {
+        if (n == 0)
+            return 1;
+        return n * Factorial(n - 1);
     }
 }
